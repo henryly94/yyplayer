@@ -70,7 +70,6 @@ void toyRenderer::init(){
 }
 
 void toyRenderer::update(){
-	printf("Counter=%d  ", counter);
 	if (counter % 60 == 0){
 		for (int i=0; i< imgWidth; i++){
 			for (int j=0; j < imgHeight; j++){
@@ -144,7 +143,6 @@ void toyRenderer::mainloop(){
 		int cur_time = duration_cast< milliseconds >(system_clock::now().time_since_epoch()).count();
 		int interval = cur_time - last_frame_time;
 		if (interval > (1000.0 / fps)) {
-			printf("Updating a frame\n");
 			glfwGetFramebufferSize(mWindow, &width, &height);
 			glViewport(0, 0, width, height);	
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -195,17 +193,18 @@ void toyRenderer::setTextures(){
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);  	
 }
 
+/*
+	int main(){
+		
+		toyRenderer*  r;
+		r = new toyRenderer();
 
-int main(){
-	
-	toyRenderer*  r;
-	r = new toyRenderer();
+		r->init();
 
-	r->init();
-
-	r->mainloop();
+		r->mainloop();
 	
-	r->quit();
+		r->quit();
 	
-	return 0;
-}
+		return 0;
+	}
+*/
