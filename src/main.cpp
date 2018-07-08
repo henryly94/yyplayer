@@ -2,6 +2,7 @@
 #include "utils.hpp"
 #include "toyRenderer.h"
 #include "BasicDecoder.h"
+#include "FFmpegDecoder.h"
 
 int main(int argc, char* argv[]){
 	if (argc != 2){
@@ -11,10 +12,10 @@ int main(int argc, char* argv[]){
 	print();
 	
 	toyRenderer* t = new toyRenderer();
-	BasicDecoder d;
+	FFmpegDecoder d;
 	d.loadVideo(argv[1]);
 	t->init();
-	t->setDecoder(&d);
+	t->setDecoder((BasicDecoder*)&d);
 	t->mainloop();
 	t->quit();
 	return 0;

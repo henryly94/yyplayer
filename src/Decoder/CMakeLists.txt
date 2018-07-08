@@ -1,3 +1,5 @@
 add_library(Decoder BasicDecoder.cpp BasicDecoder.h)
 
-target_link_libraries(Decoder avutil avcodec avformat swscale)
+add_library(FFmpegDecoder FFmpegDecoder.cpp FFmpegDecoder.h)
+
+target_link_libraries(FFmpegDecoder avutil avcodec avformat swscale)

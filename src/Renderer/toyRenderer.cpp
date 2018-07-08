@@ -109,7 +109,7 @@ void toyRenderer::update(){
 			int base1 = (i*imgWidth + j) * 3;
 			int base2 = ((imgHeight - i - 1) * imgWidth + j) * 3;
 			for (int k=0; k<3; k++){
-				swap((uint8_t*)buffer, base1+k, base2+k);
+				swap(buffer, base1+k, base2+k);
 			}	
 		}
 	}	
@@ -202,7 +202,7 @@ void toyRenderer::setTextures(){
 	if (buffer != NULL){
 		delete buffer;
 	}
-	buffer = new char[imgWidth * imgHeight * 3];
+	buffer = new uint8_t[imgWidth * imgHeight * 3];
 			
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);

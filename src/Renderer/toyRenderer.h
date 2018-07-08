@@ -32,7 +32,7 @@ private:
 
 	void setTextures();
 
-	char* buffer;
+	uint8_t* buffer;
 	
 	void update();
 	void tick();

@@ -13,6 +13,6 @@ add_subdirectory(Decoder)
 include_directories("Decoder")
 
 add_executable(player ${SOURCE_FILES})
-target_link_libraries(player Common Renderer)
+target_link_libraries(player Common Renderer Decoder FFmpegDecoder)
 
 install(TARGETS player DESTINATION bin)
