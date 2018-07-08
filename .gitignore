@@ -1,7 +1,7 @@
 # Project Structure
 build/*
 bin/*
-
+res/*
 # Prerequisites
 *.d
 
