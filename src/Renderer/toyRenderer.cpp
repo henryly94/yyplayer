@@ -39,7 +39,8 @@ toyRenderer::toyRenderer(){
 		"\n"
 		"void main()\n"
 		"{\n"
-		"	fragColor = texture(textureSampler, textCoord);\n"
+		"	color = texture(textureSampler, textCoord);\n"
+		"	fragColor = vec4(color, 1.0);\n"
 		"}\n";
 }
 
@@ -68,8 +69,14 @@ void toyRenderer::init(){
 	setShaders();
 	setTextures();
 }
+inline void swap(uint8_t* buf, int idx1, int idx2){
+	uint8_t tmp = buf[idx1];
+	buf[idx1] = buf[idx2];
+	buf[idx2] = tmp;
+} 
 
 void toyRenderer::update(){
+	/*
 	if (counter % 60 == 0){
 		for (int i=0; i< imgWidth; i++){
 			for (int j=0; j < imgHeight; j++){
@@ -95,6 +102,17 @@ void toyRenderer::update(){
 	}
 	counter ++;
 	counter = counter % 60;
+	*/
+	buffer = mDecoder->getNextFrame();
+	for (int i=0; i<imgHeight/2; i++){
+		for (int j=0; j<imgWidth; j++){
+			int base1 = (i*imgWidth + j) * 3;
+			int base2 = ((imgHeight - i - 1) * imgWidth + j) * 3;
+			for (int k=0; k<3; k++){
+				swap((uint8_t*)buffer, base1+k, base2+k);
+			}	
+		}
+	}	
 }
 
 void toyRenderer::tick(){
@@ -108,7 +126,7 @@ void toyRenderer::tick(){
 			0,
 			imgWidth,
 			imgHeight,
-			GL_RGBA,
+			GL_RGB,
 			GL_UNSIGNED_BYTE,
 			buffer
 			);
@@ -181,7 +199,10 @@ void toyRenderer::setShaders(){
 }
 
 void toyRenderer::setTextures(){
-	buffer = new char[imgWidth * imgHeight * 4];
+	if (buffer != NULL){
+		delete buffer;
+	}
+	buffer = new char[imgWidth * imgHeight * 3];
 			
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -191,6 +212,13 @@ void toyRenderer::setTextures(){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);  	
+}
+
+void toyRenderer::setDecoder(BasicDecoder* decoder){
+	mDecoder = decoder;
+	imgWidth = mDecoder->getImgWidth();
+	imgHeight = mDecoder->getImgHeight();
+	setTextures();
 }
 
 /*

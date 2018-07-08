@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <time.h>
+#include <BasicDecoder.h>
 
 class toyRenderer{
 
@@ -36,12 +37,16 @@ private:
 	void update();
 	void tick();
 
+	BasicDecoder* mDecoder;
+
 public:
 
 	toyRenderer();
 	
 	~toyRenderer();
 	
+	void setDecoder(BasicDecoder* decoder);	
+
 	void init();
 
 	void mainloop();

@@ -9,6 +9,9 @@ include_directories("Common")
 add_subdirectory(Renderer)
 include_directories("Renderer")
 
+add_subdirectory(Decoder)
+include_directories("Decoder")
+
 add_executable(player ${SOURCE_FILES})
 target_link_libraries(player Common Renderer)
 
