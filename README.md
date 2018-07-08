@@ -20,6 +20,6 @@ The binary file will be generated at bin/ , you can directly open the program by
 
 ```bash
 cd ../bin
-./player
+./player **YOUR PATH TO VIDEO FILE**
 ```
 
