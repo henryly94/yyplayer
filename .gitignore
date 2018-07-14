@@ -1,4 +1,6 @@
 # Project Structure
+*.DS_Store
+
 build/*
 bin/*
 res/*

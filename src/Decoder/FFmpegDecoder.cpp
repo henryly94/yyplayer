@@ -26,7 +26,7 @@ int FFmpegDecoder::loadVideo(char* filename){
 	av_dump_format(pFormatCtx, -1, filename, 0);
 	videoStream = -1;
   	for(int i = 0; i<pFormatCtx->nb_streams; i++) {
-    	if( pFormatCtx->streams[i]->codec->codec_type == AVMEDIA_TYPE_VIDEO) {
+    	if( pFormatCtx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO) {
 			videoStream = i;
 			break;
 		}

@@ -23,7 +23,9 @@ class FFmpegDecoder : public BasicDecoder{
 		
 
 	private:
+		
 		uint8_t* frameBuffer;
+		
 		AVFormatContext *pFormatCtx = NULL;
 		int videoStream;
 		AVCodecContext *pCodecCtx;
